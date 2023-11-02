@@ -14,7 +14,7 @@ exports.attemptQuiz = async (quizId, userId, answers, res) => {
       const score = [];
       answers.forEach((answer, index) => {
       if (quiz.Questions[index]) {
-        if (answer.Answer === questions[index].Correct_answer) {
+        if (answer.Answer.toLowerCase() === questions[index].Correct_answer.toLowerCase()) {
             score.push(questions[index].Score);
         } 
         else {

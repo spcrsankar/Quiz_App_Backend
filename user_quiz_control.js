@@ -3,7 +3,7 @@ const Quiz=require('./models/quiz')
 
 exports.myQuizzes = async (req,res)=>{
     const user_id = req._id
-    let created_quizzes = await Quiz.find({ Creator_id: user_id });
+    let created_quizzes = await Quiz.find({ Creator_id: user_id }).sort({ Created_at: -1 });
     return res.status(200).send(created_quizzes)
   }
 
@@ -18,8 +18,8 @@ exports.myQuizzes = async (req,res)=>{
       return quiz.Quiz_id
     });
   
-    console.log(partcipated_quizzes);
-    const quizzes = await Quiz.find({ _id: { $in: partcipated_quizzes } });
+    //console.log(partcipated_quizzes);
+    const quizzes = await Quiz.find({ _id: { $in: partcipated_quizzes } }).sort({ Created_at: -1 });
     
   
     return res.json({quizzes,obj})
