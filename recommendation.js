@@ -6,6 +6,7 @@ exports.getRecommentation = async (req,res)=> {
   const user_id = req._id
 
   let user = await User.findById(user_id)
+  console.log("get recommendation ",user_id)
 
   let quizzes = []
   
@@ -37,6 +38,8 @@ exports.getRecommentation = async (req,res)=> {
 
     //return quiz based on most participants
     const all_quiz = await Quiz.find({}).sort({'Participants.length':-1}).limit(5)
+     console.log("print all quiz")
+    console.log(all_quiz)
     quizzes = [...quizzes,...all_quiz]
 
     return res.status(200).json({ quizzes })
