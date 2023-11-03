@@ -35,7 +35,7 @@ exports.getRecommentation = async (req,res)=> {
         return res.status(200).json({ quizzes })
       }
     }
-
+    console.log("lesss than 3 only")
     //return quiz based on most participants
     const all_quiz = await Quiz.find({}).sort({'Participants.length':-1}).limit(5)
      console.log("print all quiz")
