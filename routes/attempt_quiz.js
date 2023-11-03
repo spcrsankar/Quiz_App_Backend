@@ -5,11 +5,10 @@ const token=require('../token_authentication');
 
 router.post('/:id',token, async (req, res) => {
   const quizId = req.params.id;
-  const { userId, answers } = req.body;
-
+  const { answers } = req.body;
+  const userId = req._id;
   try {
-    const result = await quizController.attemptQuiz(quizId, userId, answers, res);
-    res.status(200).json(result);
+    await quizController.attemptQuiz(quizId, userId, answers, res);
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
